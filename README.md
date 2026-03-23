@@ -145,8 +145,6 @@ It then reports:
 - number of unique male and female subjects
 - average B-cell count for melanoma males who were responders at time 0
 
-The prompt mentions quintazide, but the provided dataset contains treatment values that are actually present in the file. The implemented analysis therefore uses the real values from the dataset and focuses on miraclib as requested elsewhere in the prompt.
-
 ## Expected outputs
 
 After `make pipeline`, the `output/` directory contains:
