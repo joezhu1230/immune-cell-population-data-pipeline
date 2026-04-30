@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parent
 OUTPUT_DIR = ROOT / "output"
 
 st.set_page_config(page_title="Immune Cell Dashboard", layout="wide")
-st.caption("Interactive review of Parts 2-4 for the clinical trial dataset")
+st.caption("Interactive review of immune cell population analysis outputs")
 
 summary_path = OUTPUT_DIR / "summary_table.csv"
 stats_path = OUTPUT_DIR / "statistical_comparison.csv"
@@ -25,7 +25,7 @@ summary = pd.read_csv(summary_path)
 stats = pd.read_csv(stats_path)
 subset = pd.read_csv(subset_path)
 
-st.subheader("Part 2, Sample frequency overview")
+st.subheader("Sample frequency overview")
 col1, col2, col3 = st.columns(3)
 with col1:
     st.metric("Samples", summary["sample"].nunique())
@@ -38,7 +38,7 @@ selected_sample = st.selectbox("Choose a sample", sorted(summary["sample"].uniqu
 sample_view = summary.loc[summary["sample"] == selected_sample, ["sample", "total_count", "population", "count", "percentage"]]
 st.dataframe(sample_view, use_container_width=True)
 
-st.subheader("Part 3, Responder versus non-responder analysis")
+st.subheader("Responder versus non-responder analysis")
 st.image(str(plot_path), use_container_width=True)
 st.dataframe(stats, use_container_width=True)
 
@@ -51,7 +51,7 @@ else:
         + ", ".join(significant["population"].tolist())
     )
 
-st.subheader("Part 4, Baseline melanoma PBMC subset")
+st.subheader("Baseline melanoma PBMC subset")
 left, right = st.columns(2)
 with left:
     st.write("Baseline subset preview")
@@ -65,5 +65,3 @@ with right:
     st.dataframe(subset.groupby("sex")["subject"].nunique().reset_index(name="subject_count"), use_container_width=True)
     value = subset[(subset["sex"] == "M") & (subset["response"] == "yes")]["b_cell"].mean()
     st.metric("Average B cells, melanoma males, responders, time=0", f"{value:.2f}")
-
-st.markdown("Note: the prompt mentions quintazide, but the provided dataset only contains treatment values analyzed from the actual file, including miraclib.")
