@@ -8,8 +8,7 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parent
 OUTPUT_DIR = ROOT / "output"
 
-st.set_page_config(page_title="Teiko Immune Cell Dashboard", layout="wide")
-st.title("Teiko Technical Dashboard")
+st.set_page_config(page_title="Immune Cell Dashboard", layout="wide")
 st.caption("Interactive review of Parts 2-4 for the clinical trial dataset")
 
 summary_path = OUTPUT_DIR / "summary_table.csv"
