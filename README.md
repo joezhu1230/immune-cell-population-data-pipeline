@@ -1,6 +1,6 @@
 # Immune Cell Population Data Pipeline
 
-This repository contains a complete solution for the Teiko technical assignment using Python, SQLite, and Streamlit.
+This repository contains a complete immune cell population data pipeline using Python, SQLite, and Streamlit.
 
 ## Repository structure
 
@@ -32,7 +32,7 @@ make dashboard
 What each command does:
 
 - `make setup` installs the required Python packages.
-- `make pipeline` creates `teiko.db`, loads the CSV into SQLite, builds the Part 2 summary table, runs the Part 3 statistical analysis, generates the boxplot, and writes the Part 4 subset outputs.
+- `make pipeline` creates `immune_cell_data.db`, loads the CSV into SQLite, builds the Part 2 summary table, runs the Part 3 statistical analysis, generates the boxplot, and writes the Part 4 subset outputs.
 - `make dashboard` starts the Streamlit dashboard locally.
 
 The dashboard will usually be available at `http://localhost:8501`.
@@ -86,7 +86,7 @@ This schema is normalized enough for larger studies:
 ## Code structure
 
 ### `load_data.py`
-Root-level script required by the prompt. It initializes the SQLite schema and loads the CSV into the four relational tables.
+Root-level script. It initializes the SQLite schema and loads the CSV into the four relational tables.
 
 ### `run_pipeline.py`
 Runs the full analysis pipeline after the database has been created.
@@ -109,12 +109,12 @@ This split keeps data loading, database concerns, analysis logic, and presentati
 
 ## Analytical choices
 
-### Part 2
+### Summary table generation
 The summary table is generated from the SQLite database. For each sample, total cell count is computed as the sum of the five populations, then each population's percentage is computed as:
 
 `percentage = 100 * count / total_count`
 
-### Part 3
+### Responder analysis
 The responder analysis filters to:
 
 - `condition = melanoma`
@@ -130,7 +130,7 @@ The pipeline writes:
 - `output/statistical_comparison.csv`
 - `output/responder_vs_nonresponder_boxplot.png`
 
-### Part 4
+### Baseline subset analysis
 The subset analysis filters to baseline melanoma PBMC samples treated with miraclib, meaning:
 
 - `condition = melanoma`
