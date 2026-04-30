@@ -1,4 +1,4 @@
-# Teiko Technical Solution
+# Immune Cell Population Data Pipeline
 
 This repository contains a complete solution for the Teiko technical assignment using Python, SQLite, and Streamlit.
 
